@@ -41,10 +41,8 @@ const TableHeader = () => {
 const Rows = (props) => {
     const rank = props.row.index + 1;
     const name = props.row.item['player']['name'];
-    console.log(name);
     const photoUrl = props.row.item['player']['photo'];
     const age = props.row.item['player']['age'];
-    console.log('rank = ' + rank);
     const teamLogo = props.row.item.statistics[0].team.logo;
     const height = props.row.item['player']['height'];
     const weight = props.row.item['player']['weight'];
@@ -85,7 +83,6 @@ function TopPlayersComp (props){
             }
             return response.json();
         }).then((data) => {
-            console.log(data);
             setPlayersList(data['response']);
         })
     }, []);
