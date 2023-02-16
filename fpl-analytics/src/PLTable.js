@@ -66,18 +66,18 @@ const TableStandings = (props) => {
     )
 }
 
+const standingsArray = standingsData['response'][0]['league']['standings'][0];
 
-function GetPLStandingsData() {
-    
-    
-    
-    let standingsArray = standingsData['response'][0]['league']['standings'][0];
-    console.log(standingsArray);
-    const [rows,setRows] = useState(standingsArray);
-    return (
-        <div>
-            <TableStandings data = {rows}/> 
+function GetPLStandingsData(props) {
+    if(props.showStandings){    
+        return (
+            <div>
+            <TableStandings data = {standingsArray}/> 
         </div>
     )   
+    }
+    else{
+        return(null);
+    }
 }
 export default GetPLStandingsData;

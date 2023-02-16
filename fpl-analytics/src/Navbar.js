@@ -4,24 +4,44 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import GetPLStandingsData from "./PLTable";
+import Fixtures from "./Fixtures";
+import TopPlayersComp from "./TopPlayers";
 
 function showComponent(selectedItem){
     alert('yes hello' + selectedItem);
 }
 
 let OurNav = () => {
-    const [selected,changeSelected] = useState('standings');
+    const [showStandings,setShowStandings] = useState(true);
+    const [showFixtures, setShowFixtures] = useState(false);
+    const [showTopScorer, setShowTopScorer] = useState(false);
     return (
-    <Container>
-        <Navbar bg="dark" variant="dark">
+      <div>
+      <Navbar bg="dark" variant="dark">
               <Nav className="me-auto">
-              <Nav.Link id = "standings">Standings</Nav.Link>
-              <Nav.Link id = "fixtures" onClick={() => alert('hello')}>Fixtures</Nav.Link>
-              <Nav.Link id = "leaders">Top Scorers</Nav.Link>
+              <Nav.Link id = "standings" onClick={() => {
+                setShowFixtures(false);
+                setShowStandings(true);
+                setShowTopScorer(false);
+              }}>Standings</Nav.Link>
+              <Nav.Link id = "fixtures" onClick={() => {
+                setShowFixtures(true);
+                setShowStandings(false);
+                setShowTopScorer(false);
+              }}>Fixtures</Nav.Link>
+              <Nav.Link id = "leaders" onClick={() => {
+                setShowFixtures(false);
+                setShowStandings(false);
+                setShowTopScorer(true);
+              }}>Top Scorers</Nav.Link>
               </Nav>
-        </Navbar>
-        <GetPLStandingsData/>
-    </Container>
+      </Navbar>
+      <Container>
+        <GetPLStandingsData showStandings = {showStandings}/>
+        <Fixtures showFixtures = {showFixtures}/>
+        <TopPlayersComp showTopScorer = {showTopScorer}/>
+      </Container>
+      </div>
     )
 };
 
